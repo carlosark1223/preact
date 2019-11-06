@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import Person from "./Person/Person";
+// import Radium, { StyleRoot } from "radium";
 
 // function App() {
 //   return (
@@ -60,7 +61,7 @@ class App extends Component {
     const persons = [...this.state.persons];
     persons[personIndex] = person;
 
-    this.setState({persons: persons});
+    this.setState({ persons: persons });
   };
 
   togglePersonsHandler = () => {
@@ -75,7 +76,12 @@ class App extends Component {
       font: "inherit",
       border: "1px solid blue",
       padding: "8px",
-      cursor: "pointer"
+      cursor: "pointer",
+      //Utilizando la libreria radium
+      // ":hover": {
+      //   backgroundColor: "lightgreen",
+      //   color: "black"
+      // }
     };
 
     let persons = null;
@@ -113,37 +119,50 @@ class App extends Component {
         </div>
       );
 
-      style.backgroundColor = 'red';
+      style.backgroundColor = "red";
+      // style[":hover"] = {
+      //   backgroundColor: "salmon",
+      //   color: "black"
+      // };
+    }
+
+    // let classes = ['red', 'bold'].join(' ');
+    const classes = [];
+    if (this.state.persons.length <= 2) {
+      classes.push("red"); // classes = ['red']
+    }
+    if (this.state.persons.length <= 1) {
+      classes.push("bold"); // classes = ['red', 'bold']
     }
 
     return (
-      <div className="App">
-        <h1>Hola a todos</h1>
-        <p>kjasjkdkajsjdaskjdsa</p>
-        <button style={style} onClick={() => this.togglePersonsHandler()}>
-          Toggle persons
-        </button>
-        {persons}
-        {/* { this.state.showPersons === true ?
+        <div className="App">
+          <h1>Hola a todos</h1>
+          <p className={classes.join(" ")}>kjasjkdkajsjdaskjdsa</p>
+          <button style={style} onClick={() => this.togglePersonsHandler()}>
+            Toggle persons
+          </button>
+          {persons}
+          {/* { this.state.showPersons === true ?
         <div>
-          <Person
-            name={this.state.persons[0].name}
-            age={this.state.persons[0].age} />
-
-          <Person
-            name={this.state.persons[1].name}
-            age={this.state.persons[1].age}
-            click={this.switchNameHandler.bind(this,'max')}
-            changed={this.nameChangedHandler}>
-              My hobbies: Racing
-          </Person>
-
-          <Person
-            name={this.state.persons[2].name}
-            age={this.state.persons[2].age} />
+        <Person
+        name={this.state.persons[0].name}
+        age={this.state.persons[0].age} />
+        
+        <Person
+        name={this.state.persons[1].name}
+        age={this.state.persons[1].age}
+        click={this.switchNameHandler.bind(this,'max')}
+        changed={this.nameChangedHandler}>
+        My hobbies: Racing
+        </Person>
+        
+        <Person
+        name={this.state.persons[2].name}
+        age={this.state.persons[2].age} />
         </div> : null
-        } */}
-      </div>
+      } */}
+        </div>
     );
   }
 }
