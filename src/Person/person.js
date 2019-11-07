@@ -12,6 +12,12 @@ const person = (props) => {
     //     }
     // };
 
+    const rnd = Math.random();
+    if(rnd > 0.7){
+        throw new Error('Algo estuvo mal');
+        
+    }
+
     return (
         <div className='Person'>
             <p onClick={props.click}>Im {props.name} and Im {props.age} years old</p>

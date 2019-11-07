@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "./App.css";
 import Person from "./Person/Person";
+import ErrorBoundary from "./ErrorBoundary/ErrorBoundary";
+
 // import Radium, { StyleRoot } from "radium";
 
 // function App() {
@@ -76,7 +78,7 @@ class App extends Component {
       font: "inherit",
       border: "1px solid blue",
       padding: "8px",
-      cursor: "pointer",
+      cursor: "pointer"
       //Utilizando la libreria radium
       // ":hover": {
       //   backgroundColor: "lightgreen",
@@ -91,13 +93,14 @@ class App extends Component {
         <div>
           {this.state.persons.map((person, index) => {
             return (
-              <Person
-                click={() => this.deletePersonHandler(index)}
-                name={person.name}
-                age={person.age}
-                key={person.id}
-                changed={event => this.nameChangedHandler(event, person.id)}
-              />
+              <ErrorBoundary key={person.id}>
+                <Person
+                  click={() => this.deletePersonHandler(index)}
+                  name={person.name}
+                  age={person.age}
+                  changed={event => this.nameChangedHandler(event, person.id)}
+                />
+              </ErrorBoundary>
             );
           })}
 
@@ -136,14 +139,14 @@ class App extends Component {
     }
 
     return (
-        <div className="App">
-          <h1>Hola a todos</h1>
-          <p className={classes.join(" ")}>kjasjkdkajsjdaskjdsa</p>
-          <button style={style} onClick={() => this.togglePersonsHandler()}>
-            Toggle persons
-          </button>
-          {persons}
-          {/* { this.state.showPersons === true ?
+      <div className="App">
+        <h1>Hola a todos</h1>
+        <p className={classes.join(" ")}>kjasjkdkajsjdaskjdsa</p>
+        <button style={style} onClick={() => this.togglePersonsHandler()}>
+          Toggle persons
+        </button>
+        {persons}
+        {/* { this.state.showPersons === true ?
         <div>
         <Person
         name={this.state.persons[0].name}
@@ -162,7 +165,7 @@ class App extends Component {
         age={this.state.persons[2].age} />
         </div> : null
       } */}
-        </div>
+      </div>
     );
   }
 }
